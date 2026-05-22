@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SASA H4X - PREMIUM OPTIMIZER</title>
+    <style>
+        /* Base Styling */
+        body {
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Premium RGB Header */
+        .header {
+            background: linear-gradient(90deg, #ff007f, #7f00ff, #00f0ff);
+            background-size: 400% 400%;
+            animation: gradientBG 8s ease infinite;
+            padding: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0px 0px 10px rgba(255,255,255,0.6);
+            border-bottom: 3px solid #1f2833;
+        }
+
+        /* Container Card */
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #1f2833;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 0px 25px rgba(0, 240, 255, 0.2);
+            border: 1px solid #45f3ff;
+        }
+
+        h2 { color: #66fcf1; font-size: 28px; margin-bottom: 20px; }
+        label { display: block; margin: 15px 0 5px; text-align: left; color: #45f3ff; font-weight: bold;}
+
+        /* Styled Dropdowns and Inputs */
+        select, input[type="range"] {
+            width: 100%;
+            padding: 12px;
+            background: #0b0c10;
+            border: 1px solid #66fcf1;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        /* Premium Action Button */
+        .btn-inject {
+            background: linear-gradient(135deg, #00f0ff, #7f00ff);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 25px;
+            width: 100%;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(127, 0, 255, 0.4);
+        }
+
+        .btn-inject:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 240, 255, 0.6);
+        }
+
+        /* Output Box */
+        .result-box {
+            display: none;
+            margin-top: 25px;
+            background: #0b0c10;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #00ffcc;
+            text-align: left;
+        }
+
+        .result-item {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+        .highlight { color: #ff007f; font-weight: bold; }
+
+        /* Keyframes Animations */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">SASA H4X INJECTOR V2</div>
+
+    <div class="container">
+        <h2>SENSI OPTIMIZER</h2>
+        <p>Select your hardware config to calculate the best headshot sensitivity settings.</p>
+        
+        <!-- Device Brand Selection -->
+        <label for="brand">DEVICE BRAND:</label>
+        <select id="brand">
+            <option value="low">Low-End Device (2GB - 4GB RAM)</option>
+            <option value="mid">Mid-Range Device (6GB - 8GB RAM)</option>
+            <option value="high">High-End / iPhone</option>
+        </select>
+
+        <!-- Current Game Ping Slider -->
+        <label for="ping">YOUR CURRENT PING:</label>
+        <input type="range" id="ping" min="20" max="300" value="80" oninput="updatePingLabel(this.value)">
+        <p style="text-align:right; margin: 2px 0 0; font-size:12px;">Selected: <span id="ping-val" style="color:#ff007f;">80 ms</span></p>
+
+        <!-- Inject Trigger Button -->
+        <button class="btn-inject" onclick="calculateSensi()">GENERATE BEST SENSI</button>
+
+        <!-- Dynamic Results Display -->
+        <div class="result-box" id="resultBox">
+            <h3 style="color: #00ffcc; margin-top:0;">RECOMMENDED SETTINGS:</h3>
+            <div class="result-item">General: <span class="highlight" id="res-general">0</span></div>
+            <div class="result-item">Red Dot: <span class="highlight" id="res-reddot">0</span></div>
+            <div class="result-item">Suggested DPI: <span class="highlight" id="res-dpi">0</span></div>
+            <div class="result-item">Network Opt: <span style="color:#00ff00; font-weight:bold;">STABLE (Cloudflare Active)</span></div>
+            <p style="font-size: 12px; color: #c5c6c7; margin-top:15px;">*Apply these settings manually in your game for better recoil control and precision.</p>
+        </div>
+    </div>
+
+    <script>
+        // Update Ping Slider Text Realtime
+        function updatePingLabel(val) {
+            document.getElementById('ping-val').innerText = val + " ms";
+        }
+
+        // Logical calculation based on input
+        function calculateSensi() {
+            let brand = document.getElementById('brand').value;
+            let ping = parseInt(document.getElementById('ping').value);
+            
+            let general, reddot, dpi;
+
+            // Algorithm to simulate pro settings values
+            if (brand === "low") {
+                general = 100;
+                reddot = 95;
+                dpi = "450 (Do not exceed)";
+            } else if (brand === "mid") {
+                general = 98;
+                reddot = 88;
+                dpi = "520";
+            } else {
+                general = 92;
+                reddot = 82;
+                dpi = "Default (iOS Optimal)";
+            }
+
+            // Adjust values slightly if ping is high
+            if (ping > 150) {
+                reddot = parseInt(reddot) + 2; 
+            }
+
+            // Display values with animation effects
+            document.getElementById('res-general').innerText = general;
+            document.getElementById('res-reddot').innerText = reddot;
+            document.getElementById('res-dpi').innerText = dpi;
+
+            // Show output container
+            document.getElementById('resultBox').style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
